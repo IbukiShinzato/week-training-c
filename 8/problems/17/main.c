@@ -1,34 +1,35 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
-const int MAX = 10000;
 
 int main()
 {
-    int v[MAX + 1];
-    for (int i = 1; i <= MAX; i++) v[i] = 0;
+    int n = 50;
+    int v[n + 1];
+    for (int i = 1; i <= n; i++) v[i] = 0;
 
-    for (int i = 1; i <= MAX; i++)
+    for (int i = 1; i <= n; i++)
     {
-        int sum = 0;
-        for (int j = 1; j <= MAX; j++)
-        {
-            if (i % j == 0 && i != j)
-            {
-                sum += j;
-            }
-        }
-        v[i] = sum;
+        printf("%d ", v[i]);
     }
+    printf("\n");
 
-    for (int i = 1; i <= MAX; i++)
+    for (int i = 1; i <= n; i++)
     {
-        for (int j = i + 1; j <= MAX; j++)
+        for (int j = i; j <= n; j += i)
         {
-            if (v[i] == j && v[j] == i) printf("%d %d\n", i, j);
+            v[j] = v[j] ^ 1;
         }
     }
+
+    for (int i = 1; i <= n; i++)
+    {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+
+    int ans = 0;
+    for (int i = 1; i <= n; i++) ans += v[i];
+
+    printf("%d\n", ans);
 
     return 0;
 }
